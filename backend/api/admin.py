@@ -8,6 +8,7 @@ class BlogAdmin(admin.ModelAdmin):
     readonly_fields = ('date_created', 'date_updated')
     list_display = ('title', 'date_created', 'date_updated', 'feature')
     date_hierarchy = 'date_created'
+    exclude = ('slug',)
 
 
 admin.site.register(Blog, BlogAdmin)

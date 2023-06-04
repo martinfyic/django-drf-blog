@@ -1,5 +1,4 @@
 from rest_framework.response import Response
-from rest_framework.serializers import Serializer
 from rest_framework.decorators import api_view
 
 from .models import Blog
@@ -14,8 +13,8 @@ def getBlogs(request):
 
 
 @api_view(['GET'])
-def getOneBlog(request, pk):
-    blog = Blog.objects.get(id=pk)
+def getOneBlog(request, slug):
+    blog = Blog.objects.get(slug=slug)
     serializer = BlogSerializer(blog, many=False)
     return Response(serializer.data)
 
@@ -36,9 +35,9 @@ def postBlog(request):
 
 
 @api_view(['PUT'])
-def putBlog(request, pk):
+def putBlog(request, slug):
     data = request.data
-    blog = Blog.objects.get(id=pk)
+    blog = Blog.objects.get(slug=slug)
     serializer = BlogSerializer(instance=blog, data=data)
     if serializer.is_valid():
         serializer.save()
@@ -46,7 +45,7 @@ def putBlog(request, pk):
 
 
 @api_view(['DELETE'])
-def deleteBlog(request, pk):
-    blog = Blog.objects.get(id=pk)
+def deleteBlog(request, slug):
+    blog = Blog.objects.get(slug=slug)
     blog.delete()
     return Response('Blog Eliminado')
