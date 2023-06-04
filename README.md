@@ -1,3 +1,3 @@
-# django REST framework
+# django REST framework + React Ts
 
-Backend para Blog
+Backend y Frontend para Blog
