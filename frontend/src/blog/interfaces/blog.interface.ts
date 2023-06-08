@@ -10,3 +10,7 @@ export interface Blog {
 	slug: string;
 	title: string;
 }
+
+export type BlogsProps = {
+	blogs: Blog[];
+};
