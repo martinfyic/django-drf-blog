@@ -19,10 +19,7 @@ class Blog(models.Model):
 
     class Meta:
         verbose_name_plural = 'blogs'
-        ordering = ['date_created']
-
-    def get_asolute_url(self):
-        return reverse('api:blog', kwargs={'slug': self.slug})
+        ordering = ['-date_created']
 
     def __str__(self):
         return self.title
