@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Blog } from '../interfaces';
 import { getBlogs } from '../helpers';
+import { Blogs } from '../components/Blogs';
+import { Blog } from '..';
 
 const URL = 'http://127.0.0.1:8000/blog/get';
 
-export const HomePage = () => {
-	const [blogs, setBlogs] = useState([]);
+export const HomePage: React.FC = () => {
+	const [blogs, setBlogs] = useState<Blog[]>([]);
 
 	useEffect(() => {
 		getBlogs(URL, setBlogs);
@@ -22,19 +23,8 @@ export const HomePage = () => {
 				perferendis quibusdam vero, consequatur rem aperiam expedita tempore? Velit hic aliquam quam, inventore
 				molestias unde similique, omnis quasi alias earum sunt cumque!
 			</p>
-			<section>
-				<h3>Blogs</h3>
-				<ul>
-					{blogs?.map((blog: Blog) => (
-						<li key={blog.slug}>
-							<h4>{blog.title}</h4>
-							<h5>
-								<span>{blog.author}</span> fecha: 02/20/2022
-							</h5>
-							<p>{blog.content}</p>
-						</li>
-					))}
-				</ul>
+			<section className="text-center container mx-auto mt-5">
+				<Blogs blogs={blogs} />
 			</section>
 		</>
 	);
