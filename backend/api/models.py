@@ -16,6 +16,7 @@ class Blog(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
     slug = models.SlugField(unique=True, null=False, blank=False)
+    thumbnail = models.URLField(null=True)
 
     class Meta:
         verbose_name_plural = 'blogs'
