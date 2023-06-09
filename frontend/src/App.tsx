@@ -1,7 +1,7 @@
 import './App.css';
 import { AppRoutes } from './routes';
 
-function App() {
+function App(): JSX.Element {
 	return (
 		<>
 			<AppRoutes />
