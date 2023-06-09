@@ -12,6 +12,11 @@ export const BlogList: React.FC<BlogsProps> = ({ blogs }) => {
 							<h5 className="mb-5">
 								<span>{blog.author}</span> | {blog.date_created}
 							</h5>
+							<p>
+								{blog.categories.map((t) => (
+									<strong className="mx-2">{t.title}</strong>
+								))}
+							</p>
 							<p>{blog.overview}</p>
 						</div>
 					</Link>
