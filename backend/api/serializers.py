@@ -1,14 +1,19 @@
 from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from .models import Blog, Category
 
 
-class BlogSerializer(ModelSerializer):
+class CategorySerializer(ModelSerializer):
+
     class Meta:
-        model = Blog
+        model = Category
         fields = '__all__'
 
 
-class CategorySerializer(ModelSerializer):
+class BlogSerializer(ModelSerializer):
+    author = serializers.StringRelatedField()
+    categories = CategorySerializer(many=True)
+
     class Meta:
-        model = Category
+        model = Blog
         fields = '__all__'
