@@ -1,6 +1,14 @@
+export interface Category {
+	id: number;
+	title: string;
+	date_created: string;
+	date_updated: string;
+	thumbnail: string | null;
+}
+
 export interface Blog {
 	author: number;
-	categories: number[];
+	categories: Category[];
 	content: string;
 	date_created: string;
 	date_updated: string;
