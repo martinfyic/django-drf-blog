@@ -22,9 +22,11 @@ export const BlogItem = () => {
 
 	return (
 		<div className="text-center mt-5">
-			<h1 className="font-bold">{blog.title}</h1>
-			<h4 className="font-bold mt-5">{blog.date_created}</h4>
-			<img src={blog.thumbnail} alt="" />
+			<h1 className="font-bold text-5xl">{blog.title}</h1>
+			<h4 className="font-bold mt-5 text-2xl">
+				<strong>{blog.author}</strong> - {blog.date_created}
+			</h4>
+			<img className="my-9 mx-auto w-9/12" src={blog.thumbnail} alt={blog.title} />
 			<p className="px-10 mx-auto max-w-5xl my-7">{blog.content}</p>
 			<button className="bg-sky-700 px-4 py-2 rounded-xl hover:bg-sky-500 mt-2" onClick={onNavigateBack}>
 				Volver
