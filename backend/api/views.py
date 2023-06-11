@@ -1,11 +1,28 @@
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 from .models import Blog
 from .serializers import BlogSerializer
+
+
+class BlogPagination(PageNumberPagination):
+    page_size = 10  # Número de elementos por página
+    # Parámetro opcional para cambiar el número de elementos por página
+    page_size_query_param = 'page_size'
+    max_page_size = 100  # Número máximo de elementos por página permitido
+
+    # Opcional: puedes personalizar la respuesta de paginación
+    def get_paginated_response(self, data):
+        return Response({
+            'next': self.get_next_link(),
+            'previous': self.get_previous_link(),
+            'count': self.page.paginator.count,
+            'results': data
+        })
 
 
 @swagger_auto_schema(
@@ -19,8 +36,10 @@ def getBlogs(request):
     Vista para obtener todos los blogs.
     """
     blog = Blog.objects.all()
-    serializer = BlogSerializer(blog, many=True)
-    return Response(serializer.data)
+    paginator = BlogPagination()
+    paginated_blog = paginator.paginate_queryset(blog, request)
+    serializer = BlogSerializer(paginated_blog, many=True)
+    return paginator.get_paginated_response(serializer.data)
 
 
 @swagger_auto_schema(
