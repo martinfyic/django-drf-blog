@@ -1,7 +1,10 @@
 import axios from 'axios';
-import { Blog } from '../interfaces';
+import { Blog, ResponseBlogAxios } from '../interfaces';
 
-export const getBlogs = (url: string, setBlogs: React.Dispatch<React.SetStateAction<Blog[]>>) => {
+export const getBlogs = (
+	url: string,
+	setBlogs: React.Dispatch<React.SetStateAction<ResponseBlogAxios | undefined>>
+) => {
 	axios
 		.get(url)
 		.then((response) => {
