@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { getBlogs } from '../helpers';
-import { BlogList } from '../components';
-import { Blog } from '../interfaces';
+import { BlogList, Loading } from '../components';
+import { ResponseBlogAxios } from '../interfaces';
 
 const URL = 'http://127.0.0.1:8000/blog/get';
 
 export const HomePage: React.FC = () => {
-	const [blogs, setBlogs] = useState<Blog[]>([]);
+	const [blogs, setBlogs] = useState<ResponseBlogAxios | undefined>(undefined);
 
 	const memoizedGetBlogs = useMemo(() => getBlogs, []);
 
@@ -26,7 +26,7 @@ export const HomePage: React.FC = () => {
 				molestias unde similique, omnis quasi alias earum sunt cumque!
 			</p>
 			<section className="text-center container mx-auto my-5">
-				<BlogList blogs={blogs} />
+				{blogs === undefined ? <Loading /> : <BlogList blogs={blogs} />}
 			</section>
 		</>
 	);
