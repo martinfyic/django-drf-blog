@@ -20,6 +20,13 @@ export interface Blog {
 	title: string;
 }
 
+export interface ResponseBlogAxios {
+	count: number;
+	next: string | null;
+	previous: string | null;
+	results: Blog[];
+}
+
 export type BlogsProps = {
-	blogs: Blog[];
+	blogs: ResponseBlogAxios | undefined;
 };
